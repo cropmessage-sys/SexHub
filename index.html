@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOCTURNE — Luxury Adult Lifestyle &amp; Cinema Platform</title>
+
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#08080A',
+            elevated: '#111115',
+            surface: '#18181E',
+            ivory: '#F5F3F0',
+            silver: '#9A969E',
+            crimson: '#E11D48',
+            roseaccent: '#F43F5E',
+            champagne: '#D4AF37'
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif']
+          },
+          boxShadow: {
+            'rose-glow': '0 0 28px -4px rgba(225, 29, 72, 0.45)',
+            'gold-glow': '0 0 24px -6px rgba(212, 175, 55, 0.35)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    body {
+      background-color: #08080A;
+      color: #F5F3F0;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      overflow-x: clip;
+    }
+
+    /* Hide scrollbar on horizontal filter/spotlight strips while preserving smooth scroll */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Glassmorphic surfaces */
+    .glass-nav {
+      background: rgba(8, 8, 10, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-card {
+      background: rgba(24, 24, 30, 0.74);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Sensual gradient text */
+    .rose-gradient-text {
+      background: linear-gradient(125deg, #F5F3F0 15%, #F43F5E 55%, #D4AF37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Scroll reveal transition */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Cinema video card hover */
+    .cinema-card:hover .cinema-thumb {
+      transform: scale(1.05);
+    }
+    .cinema-card:hover .play-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Custom range input styling */
+    input[type="range"].nocturne-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    input[type="range"].nocturne-slider::-webkit-slider-runnable-track {
+      height: 5px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+    input[type="range"].nocturne-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #F43F5E;
+      margin-top: -4.5px;
+      box-shadow: 0 0 10px rgba(244, 63, 94, 0.8);
+    }
+
+    /* Animated subtle ambient drift for cinema player */
+    @keyframes cinemaPulse {
+      0%, 100% {
+        transform: scale(1) translate(0, 0);
+        opacity: 0.45;
+      }
+      50% {
+        transform: scale(1.12) translate(12px, -8px);
+        opacity: 0.72;
+      }
+    }
+    .cinema-ambient-orb {
+      animation: cinemaPulse 6s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-obsidian text-ivory antialiased selection:bg-crimson selection:text-white">
+
+  <!-- ==================== 1. 18+ AGE VERIFICATION GATE MODAL ==================== -->
+  <div id="ageGateModal" role="dialog" aria-modal="true" aria-labelledby="ageGateTitle" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-2xl">
+    <div class="relative w-full max-w-lg rounded-3xl bg-elevated border border-white/15 p-7 sm:p-10 shadow-2xl overflow-hidden">
+      <!-- Decorative sensual glow -->
+      <div class="pointer-events-none absolute -top-24 -right-24 w-64 h-64 rounded-full bg-crimson/20 blur-3xl"></div>
+      <div class="pointer-events-none absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-champagne/10 blur-3xl"></div>
+
+      <div class="relative z-10 text-center">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-crimson/15 border border-crimson/40 text-roseaccent text-xs font-semibold tracking-widest uppercase mb-5">
+          <span class="w-2 h-2 rounded-full bg-roseaccent animate-pulse"></span>
+          Adults Only • 18+ Verification
+        </div>
+
+        <h1 id="ageGateTitle" class="font-serif text-4xl sm:text-5xl font-semibold tracking-wide text-ivory mb-3">
+          NOCTURNE
+        </h1>
+        <p class="text-sm sm:text-base text-silver leading-relaxed mb-7">
+          This platform presents mature, artistic adult cinema, editorial photography, and creator experiences intended strictly for adults aged <strong class="text-ivory">18 years or older</strong> (or the age of majority in your jurisdiction).
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3.5 mb-6">
+          <button id="enterSiteBtn" type="button" class="flex-1 py-3.5 px-6 rounded-xl bg-gradient-to-r from-crimson to-roseaccent hover:brightness-110 text-white font-semibold text-sm tracking-wide shadow-rose-glow transition cursor-pointer">
+            I am 18+ — Enter Nocturne
+          </button>
+          <button id="exitSiteBtn" type="button" class="py-3.5 px-6 rounded-xl bg-surface hover:bg-white/10 border border-white/10 text-silver hover:text-ivory font-medium text-sm transition cursor-pointer">
+            Exit
+          </button>
+        </div>
+
+        <p id="ageGateNotice" class="hidden text-xs text-roseaccent bg-crimson/10 border border-crimson/30 rounded-xl p-3 mb-4">
+          You have chosen to exit. Redirecting to a safe informational page...
+        </p>
+
+        <p class="text-[11px] text-silver/80 leading-relaxed">
+          By entering, you confirm you are of legal adult age and agree to our <a href="#footer" class="underline hover:text-ivory">Terms of Service</a>, <a href="#footer" class="underline hover:text-ivory">Privacy Policy</a>, and <a href="#footer" class="underline hover:text-ivory">18 U.S.C. § 2257 Statement</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" role="status" aria-live="polite" class="fixed bottom-6 right-6 z-[95] translate-y-24 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="flex items-center gap-3 px-5 py-3.5 rounded-xl bg-surface border border-crimson/40 shadow-2xl text-sm text-ivory">
+      <span class="w-2 h-2 rounded-full bg-roseaccent animate-ping"></span>
+      <span id="toastMessage">Action completed</span>
+    </div>
+  </div>
+
+  <!-- ==================== 1B. TOP STICKY PARTNER BANNER AD ==================== -->
+  <div id="topStickyAdBanner" class="sticky top-0 z-[55] bg-gradient-to-r from-obsidian via-[#160B10] to-obsidian border-b border-crimson/30 text-ivory transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <span class="px-2 py-0.5 rounded bg-champagne/15 border border-champagne/35 text-champagne text-[10px] font-bold uppercase tracking-wider shrink-0">
+          Partner
+        </span>
+        <p class="text-silver truncate">
+          <strong class="text-ivory font-medium">Atelier Velours Private Salon:</strong> Complimentary 14-day member pass to 8K boudoir cinema &amp; live suites.
+        </p>
+      </div>
+      <div class="flex items-center gap-2.5 shrink-0">
+        <a
+          href="#membership"
+          data-aff-sub="top_sticky_banner"
+          onclick="handleSmartAffiliateClick(event, 'Atelier Velours Private Salon', 'top_sticky_banner', '#membership')"
+          class="px-3 py-1 rounded-lg bg-crimson/20 hover:bg-crimson text-roseaccent hover:text-white border border-crimson/40 font-semibold text-[11px] transition whitespace-nowrap"
+        >
+          Claim Pass →
+        </a>
+        <button
+          id="dismissTopAdBtn"
+          type="button"
+          aria-label="Dismiss partner banner"
+          class="p-1 rounded-lg text-silver hover:text-ivory hover:bg-white/5 transition cursor-pointer"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2. STICKY DARK GLASSMORPHIC NAVBAR ==================== -->
+  <header id="mainNavbar" class="sticky top-[37px] sm:top-[35px] z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <!-- Left: Mobile Menu Button + NOCTURNE Logo -->
+        <div class="flex items-center gap-3">
+          <button id="mobileMenuBtn" type="button" aria-label="Open Navigation Menu" class="lg:hidden p-2 rounded-xl bg-elevated hover:bg-surface border border-white/10 text-ivory transition cursor-pointer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
+          <a href="#home" class="flex items-center gap-2.5 group">
+            <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-crimson via-roseaccent to-champagne p-[1px] shadow-rose-glow">
+              <span class="w-full h-full rounded-[11px] bg-obsidian flex items-center justify-center font-serif text-xl font-bold text-ivory">
+                N
+              </span>
+            </span>
+            <div>
+              <span class="font-serif text-2xl sm:text-[26px] font-semibold tracking-[0.14em] text-ivory group-hover:text-roseaccent transition">
+                NOCTURNE
+              </span>
+              <span class="hidden sm:block text-[9px] uppercase tracking-[0.28em] text-champagne -mt-1">
+                Private Cinema
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Center: Desktop Navigation Links -->
+        <nav aria-label="Primary Navigation" class="hidden lg:flex items-center gap-7 text-sm font-medium text-silver">
+          <a href="#home" class="hover:text-ivory transition">Home</a>
+          <a href="#featured" class="hover:text-ivory transition">Featured</a>
+          <a href="#categories" class="hover:text-ivory transition">Categories</a>
+          <a href="#models" class="hover:text-ivory transition">Muses</a>
+          <a href="#membership" class="hover:text-ivory transition">Membership</a>
+          <a href="#about" class="hover:text-ivory transition">About</a>
+          <a href="#support" class="hover:text-ivory transition">Support</a>
+        </nav>
+
+        <!-- Right: Live Search Input Toggle & VIP Access CTA -->
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <button id="navSearchToggle" type="button" aria-label="Toggle Search" class="p-2.5 rounded-xl bg-elevated hover:bg-surface border border-white/10 text-silver hover:text-roseaccent transition cursor-pointer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+          <a
+            href="#membership"
+            data-aff-sub="navbar_vip_cta"
+            onclick="handleSmartAffiliateClick(event, 'Nocturne VIP Access', 'navbar_vip_cta', '#membership')"
+            class="px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-crimson to-roseaccent hover:brightness-110 text-white text-xs sm:text-sm font-semibold tracking-wide shadow-rose-glow transition"
+          >
+            VIP Access
+          </a>
+        </div>
+      </div>
+
+      <!-- Expandable Search Bar in Header -->
+      <div id="headerSearchDrawer" class="hidden pb-4 pt-1 border-t border-white/[0.08]">
+        <div class="relative max-w-2xl mx-auto">
+          <input id="headerSearchInput" type="text" placeholder="Search films, muses, moods, or 4K collections..." class="w-full pl-11 pr-24 py-3 rounded-xl bg-elevated border border-white/15 focus:border-roseaccent focus:outline-none text-sm text-ivory placeholder-silver" />
+          <svg class="w-5 h-5 text-silver absolute left-3.5 top-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <button id="clearHeaderSearch" type="button" class="hidden absolute right-3 top-2.5 px-2.5 py-1 rounded-lg text-xs bg-white/10 hover:bg-white/15 text-silver hover:text-ivory cursor-pointer">
+            Clear
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Slide-Out Navigation Drawer -->
+  <div id="mobileDrawerBackdrop" class="fixed inset-0 z-[70] bg-black/75 backdrop-blur-sm hidden">
+    <aside id="mobileDrawer" aria-label="Mobile Navigation" class="w-80 max-w-[85vw] h-full bg-elevated border-r border-white/10 p-6 flex flex-col justify-between transform -translate-x-full transition-transform duration-300">
+      <div>
+        <div class="flex items-center justify-between pb-6 border-b border-white/10">
+          <span class="font-serif text-2xl font-semibold tracking-[0.14em] text-ivory">NOCTURNE</span>
+          <button id="closeMobileMenu" type="button" aria-label="Close Navigation Menu" class="p-2 rounded-lg bg-surface text-silver hover:text-ivory cursor-pointer">✕</button>
+        </div>
+        <div class="mt-6 flex flex-col gap-4 text-base font-medium text-ivory/90">
+          <a href="#home" class="mobile-nav-link py-1.5 hover:text-roseaccent transition">Home</a>
+          <a href="#featured" class="mobile-nav-link py-1.5 hover:text-roseaccent transition">Featured Releases</a>
+          <a href="#categories" class="mobile-nav-link py-1.5 hover:text-roseaccent transition">Categories</a>
+          <a href="#models" class="mobile-nav-link py-1.5 hover:text-roseaccent transition">Exclusive Muses</a>
+          <a href="#membership" class="mobile-nav-link py-1.5 hover:text-roseaccent transition">VIP Membership</a>
+          <a href="#about" class="mobile-nav-link py-1.5 hover:text-roseaccent transition">About Nocturne</a>
+          <a href="#support" class="mobile-nav-link py-1.5 hover:text-roseaccent transition">Concierge &amp; FAQ</a>
+        </div>
+      </div>
+
+      <div class="pt-6 border-t border-white/10">
+        <a
+          href="#membership"
+          data-aff-sub="mobile_drawer_vip"
+          onclick="closeMobileDrawer(); handleSmartAffiliateClick(event, 'Nocturne VIP Access', 'mobile_drawer_vip', '#membership')"
+          class="block w-full py-3.5 rounded-xl bg-gradient-to-r from-crimson to-roseaccent text-white text-center font-semibold text-sm shadow-rose-glow"
+        >
+          Unlock VIP Access
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ==================== 3. FULL-WIDTH HERO SECTION ==================== -->
+  <section id="home" class="relative min-h-[85vh] sm:min-h-[90vh] flex items-center overflow-hidden">
+    <!-- Self-contained high-craft inline SVG editorial backdrop -->
+    <svg aria-hidden="true" class="absolute inset-0 w-full h-full object-cover scale-105" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="heroCrimsonGlow" cx="72%" cy="38%" r="55%">
+          <stop offset="0%" stop-color="#E11D48" stop-opacity="0.42" />
+          <stop offset="45%" stop-color="#4C0519" stop-opacity="0.26" />
+          <stop offset="100%" stop-color="#08080A" stop-opacity="0" />
+        </radialGradient>
+        <radialGradient id="heroGoldGlow" cx="82%" cy="72%" r="42%">
+          <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.22" />
+          <stop offset="100%" stop-color="#08080A" stop-opacity="0" />
+        </radialGradient>
+        <linearGradient id="heroBaseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#08080A" />
+          <stop offset="55%" stop-color="#140B10" />
+          <stop offset="100%" stop-color="#0A0A0E" />
+        </linearGradient>
+      </defs>
+      <rect width="1600" height="900" fill="url(#heroBaseGrad)" />
+      <rect width="1600" height="900" fill="url(#heroCrimsonGlow)" />
+      <rect width="1600" height="900" fill="url(#heroGoldGlow)" />
+      <!-- Architectural light arcs -->
+      <circle cx="1180" cy="360" r="320" fill="none" stroke="#F43F5E" stroke-opacity="0.14" stroke-width="1.5" />
+      <circle cx="1180" cy="360" r="220" fill="none" stroke="#D4AF37" stroke-opacity="0.16" stroke-width="1" stroke-dasharray="8 8" />
+      <path d="M920 820 Q1190 420 1540 160" fill="none" stroke="#F43F5E" stroke-opacity="0.22" stroke-width="2" />
+      <path d="M980 860 Q1250 470 1580 230" fill="none" stroke="#D4AF37" stroke-opacity="0.15" stroke-width="1.5" />
+    </svg>
+
+    <!-- Multi-layered editorial dark gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-r from-obsidian via-obsidian/80 to-obsidian/35"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-obsidian/55"></div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 w-full">
+      <div class="max-w-2xl">
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-surface/85 border border-champagne/35 backdrop-blur-md mb-6">
+          <span class="text-champagne text-xs">✦</span>
+          <span class="text-xs font-medium tracking-[0.2em] uppercase text-ivory/90">Ultra-HD Intimate Cinema</span>
+        </div>
+
+        <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.04] tracking-tight text-ivory mb-6">
+          After Dark, <br />
+          <span class="italic rose-gradient-text">Desire Perfected.</span>
+        </h1>
+
+        <p class="text-base sm:text-lg text-silver leading-relaxed max-w-xl mb-8">
+          Experience cinema-grade sensual storytelling, curated private series, and exclusive creator releases filmed in crisp 4K 60fps. Crafted for discerning adult viewers who value artistry, privacy, and atmosphere.
+        </p>
+
+        <!-- Dual CTA Buttons with Smart Affiliate Tracking -->
+        <div class="flex flex-wrap items-center gap-4 mb-10">
+          <a
+            href="#featured"
+            data-aff-sub="hero_explore_releases"
+            onclick="handleSmartAffiliateClick(event, 'Nocturne Exclusive Screening Room', 'hero_explore_releases', '#featured')"
+            class="inline-flex items-center gap-3 px-7 py-4 rounded-xl bg-gradient-to-r from-crimson to-roseaccent hover:brightness-110 text-white font-semibold text-sm sm:text-base transition shadow-rose-glow"
+          >
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Explore Exclusive Releases
+          </a>
+          <a
+            href="#membership"
+            data-aff-sub="hero_vip_membership"
+            onclick="handleSmartAffiliateClick(event, 'Nocturne Inner Circle VIP', 'hero_vip_membership', '#membership')"
+            class="inline-flex items-center gap-2.5 px-7 py-4 rounded-xl bg-elevated/80 hover:bg-surface border border-champagne/40 text-ivory font-medium text-sm sm:text-base backdrop-blur-md transition"
+          >
+            <span class="text-champagne">✦</span>
+            Unlock VIP Membership
+          </a>
+        </div>
+
+        <!-- Subtle Trust Indicators -->
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-2.5 text-xs sm:text-sm text-silver">
+          <span class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-roseaccent"></span>
+            100% Verified Creators
+          </span>
+          <span class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-champagne"></span>
+            Discreet Billing
+          </span>
+          <span class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-roseaccent"></span>
+            Ad-Free Member Streaming
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3B. IN-CONTENT HORIZONTAL BANNER AD (AFTER HERO) ==================== -->
+  <section aria-label="Sponsored Spotlight" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-2">
+    <div class="rounded-2xl glass-card p-4 sm:p-5 border border-white/10 hover:border-champagne/35 transition flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div class="flex items-center gap-4 min-w-0">
+        <div id="heroPartnerThumb" class="w-20 h-14 sm:w-24 sm:h-16 rounded-xl overflow-hidden border border-white/10 shrink-0"></div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[10px] font-semibold uppercase tracking-widest text-silver">
+              Sponsored
+            </span>
+            <span class="text-[11px] text-champagne font-medium">Partner Showcase • 8K Spatial Audio</span>
+          </div>
+          <h3 class="font-serif text-lg sm:text-xl font-semibold text-ivory truncate">
+            Maison Lumière: Late-Night Sensual Cinema &amp; Private VR Lounges
+          </h3>
+          <p class="text-xs text-silver line-clamp-1">
+            Curated European intimacy series with discreet member billing and instant cross-device streaming.
+          </p>
+        </div>
+      </div>
+      <a
+        href="#membership"
+        data-aff-sub="post_hero_banner"
+        onclick="handleSmartAffiliateClick(event, 'Maison Lumière Partner Showcase', 'post_hero_banner', '#membership')"
+        class="w-full md:w-auto shrink-0 text-center px-5 py-2.5 rounded-xl bg-white/5 hover:bg-gradient-to-r hover:from-crimson hover:to-roseaccent border border-white/15 hover:border-transparent text-ivory hover:text-white text-xs sm:text-sm font-semibold transition"
+      >
+        Explore Partner →
+      </a>
+    </div>
+  </section>
+
+  <!-- ==================== 4. CATEGORIES & LIVE FILTER / SEARCH BAR ==================== -->
+  <section id="categories" class="sticky top-[93px] sm:top-[115px] z-30 bg-obsidian/92 backdrop-blur-xl border-y border-white/[0.08] py-4 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <!-- Category Pills -->
+      <div id="categoryPills" role="tablist" aria-label="Release Categories" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 lg:pb-0">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Search + Sort Controls -->
+      <div class="flex items-center gap-3 w-full lg:w-auto">
+        <div class="relative flex-1 sm:w-64">
+          <input id="mainSearchInput" type="text" placeholder="Filter titles or muses..." class="w-full pl-9 pr-4 py-2 rounded-xl bg-elevated border border-white/10 focus:border-roseaccent focus:outline-none text-xs sm:text-sm text-ivory placeholder-silver" />
+          <svg class="w-4 h-4 text-silver absolute left-3 top-2.5 sm:top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+        <select id="sortSelect" aria-label="Sort Releases" class="px-3.5 py-2 rounded-xl bg-elevated border border-white/10 focus:border-roseaccent focus:outline-none text-xs sm:text-sm text-ivory cursor-pointer">
+          <option value="featured">Featured</option>
+          <option value="popular">Most Viewed</option>
+          <option value="rating">Highest Rated</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 5. FEATURED MODELS / VIDEOS SECTION ==================== -->
+  <section id="featured" class="py-14 sm:py-20 reveal-up">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+        <div>
+          <span class="text-xs uppercase tracking-[0.25em] text-roseaccent font-semibold">Curated Selection</span>
+          <h2 id="sectionHeading" class="font-serif text-3xl sm:text-5xl font-semibold text-ivory mt-1">
+            Featured <span class="italic text-roseaccent">Midnight Releases</span>
+          </h2>
+        </div>
+        <p id="resultsCounter" class="text-xs sm:text-sm text-silver">Showing 10 curated releases</p>
+      </div>
+
+      <!-- Responsive Video Cards Grid (includes Native Sponsored Cards) -->
+      <div id="videosGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+        <!-- Populated via JS -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="hidden text-center py-16 px-6 rounded-2xl glass-card mt-6">
+        <p class="font-serif text-2xl text-ivory mb-2">No matching releases found</p>
+        <p class="text-sm text-silver mb-5">Try clearing your search filter or switching back to All Releases.</p>
+        <button id="resetFiltersBtn" type="button" class="px-5 py-2.5 rounded-xl bg-crimson hover:bg-roseaccent text-white text-sm font-semibold transition cursor-pointer">
+          Reset Filters
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 6. EXCLUSIVE MODELS SPOTLIGHT ROW ==================== -->
+  <section id="models" class="py-14 sm:py-20 bg-elevated/50 border-y border-white/[0.08] reveal-up">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+        <div>
+          <span class="text-xs uppercase tracking-[0.25em] text-champagne font-semibold">Verified Roster</span>
+          <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-ivory mt-1">
+            Exclusive <span class="italic text-roseaccent">Muses Spotlight</span>
+          </h2>
+        </div>
+        <p class="text-sm text-silver max-w-md">
+          Explore intimate portfolios, follower statistics, and complete 4K filmographies of our resident creators.
+        </p>
+      </div>
+
+      <!-- Horizontal scroll on small mobile, clean responsive grid on tablet/desktop -->
+      <div id="modelsGrid" class="flex sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5 overflow-x-auto no-scrollbar pb-2 sm:pb-0">
+        <!-- Populated via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 6B. MID-PAGE HORIZONTAL PARTNER BANNER ==================== -->
+  <section aria-label="Mid-Page Partner Banner" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-2 reveal-up">
+    <div class="relative rounded-2xl bg-gradient-to-r from-elevated via-[#191116] to-elevated border border-crimson/30 p-6 sm:p-8 overflow-hidden flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+      <div class="pointer-events-none absolute -right-16 -top-16 w-64 h-64 bg-crimson/15 rounded-full blur-3xl"></div>
+      <div class="relative z-10 max-w-2xl">
+        <div class="flex items-center gap-2.5 mb-2">
+          <span class="px-2.5 py-0.5 rounded bg-crimson/20 border border-crimson/40 text-roseaccent text-[10px] font-bold uppercase tracking-widest">
+            Sponsored Partner
+          </span>
+          <span class="text-xs text-champagne font-medium">Limited Member Privilege</span>
+        </div>
+        <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-ivory mb-1.5">
+          Velvet &amp; Silk Collector’s Anthology + 40% Annual Savings
+        </h3>
+        <p class="text-xs sm:text-sm text-silver leading-relaxed">
+          Unlock uncut director editions, offline 4K downloads, and partner salon access under a single discreet <strong class="text-ivory">NCTRNE DIGITAL</strong> statement.
+        </p>
+      </div>
+      <div class="relative z-10 flex flex-wrap items-center gap-3 shrink-0 w-full lg:w-auto">
+        <a
+          href="#membership"
+          data-aff-sub="mid_page_partner_banner"
+          onclick="handleSmartAffiliateClick(event, 'Velvet & Silk Collector Anthology', 'mid_page_partner_banner', '#membership')"
+          class="flex-1 lg:flex-initial text-center px-6 py-3.5 rounded-xl bg-gradient-to-r from-crimson to-roseaccent hover:brightness-110 text-white text-xs sm:text-sm font-semibold shadow-rose-glow transition"
+        >
+          Unlock Member Offer
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 7. MEMBERSHIP / PREMIUM PLANS SECTION ==================== -->
+  <section id="membership" class="py-16 sm:py-24 relative overflow-hidden reveal-up">
+    <div class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[540px] h-[540px] rounded-full bg-crimson/10 blur-3xl"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs uppercase tracking-[0.25em] text-champagne font-semibold">Inner Circle Access</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-ivory mt-2 mb-4">
+          Elevate Your <span class="italic rose-gradient-text">Midnight Pass</span>
+        </h2>
+        <p class="text-sm sm:text-base text-silver mb-8">
+          Stream uninterrupted 4K HDR releases, unlock VIP exclusives, and enjoy discreet billing on every statement.
+        </p>
+
+        <!-- Monthly / Annual Billing Toggle -->
+        <div class="inline-flex items-center p-1.5 rounded-2xl bg-elevated border border-white/10">
+          <button id="monthlyBtn" type="button" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-crimson text-white transition cursor-pointer">
+            Monthly
+          </button>
+          <button id="annualBtn" type="button" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-silver hover:text-ivory flex items-center gap-2 transition cursor-pointer">
+            Annual
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-champagne/20 text-champagne border border-champagne/40">
+              Save 40%
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3 Pricing Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-7 items-stretch">
+        <!-- Card 1: Standard Pass ($19/mo) -->
+        <div class="rounded-2xl glass-card p-7 sm:p-8 flex flex-col justify-between hover:border-white/20 transition">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-serif text-2xl font-semibold text-ivory">Standard Pass</h3>
+              <span class="px-3 py-1 rounded-full text-xs bg-white/5 text-silver border border-white/10">Essential</span>
+            </div>
+            <p class="text-xs sm:text-sm text-silver mb-6">Full HD &amp; 4K streaming across our core editorial and after-hours library.</p>
+            <div class="mb-6 flex items-baseline gap-1.5">
+              <span id="priceStandard" class="font-serif text-4xl sm:text-5xl font-bold text-ivory">$19</span>
+              <span id="periodStandard" class="text-xs text-silver">/ month</span>
+            </div>
+            <ul class="space-y-3.5 text-sm text-ivory/90 mb-8">
+              <li class="flex items-center gap-3"><span class="text-roseaccent">✓</span> Unlimited 1080p &amp; 4K Streaming</li>
+              <li class="flex items-center gap-3"><span class="text-roseaccent">✓</span> Full Editorial &amp; After Hours Catalog</li>
+              <li class="flex items-center gap-3"><span class="text-roseaccent">✓</span> Watch on 2 Simultaneous Devices</li>
+              <li class="flex items-center gap-3"><span class="text-roseaccent">✓</span> 100% Discreet Billing Descriptor</li>
+            </ul>
+          </div>
+          <button
+            type="button"
+            data-aff-sub="plan_standard_pass"
+            onclick="handleSmartAffiliateClick(event, 'Standard Pass', 'plan_standard_pass', null, () => openCheckoutModal('Standard Pass', document.getElementById('priceStandard').innerText + ' ' + document.getElementById('periodStandard').innerText))"
+            class="w-full py-3.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-ivory font-semibold text-sm transition cursor-pointer"
+          >
+            Select Plan
+          </button>
+        </div>
+
+        <!-- Card 2: VIP Noir ($34/mo - Most Popular) -->
+        <div class="relative rounded-2xl bg-gradient-to-b from-surface to-elevated p-7 sm:p-8 flex flex-col justify-between border-2 border-crimson shadow-rose-glow lg:-translate-y-3">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-crimson to-roseaccent text-white text-[11px] font-bold uppercase tracking-widest shadow">
+            Most Popular
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-3 mt-1">
+              <h3 class="font-serif text-2xl font-semibold text-ivory">VIP Noir</h3>
+              <span class="px-3 py-1 rounded-full text-xs bg-champagne/15 text-champagne border border-champagne/30 font-medium">Signature</span>
+            </div>
+            <p class="text-xs sm:text-sm text-silver mb-6">Our flagship tier with uncompressed 4K HDR, VIP Exclusives, and offline downloads.</p>
+            <div class="mb-6 flex items-baseline gap-1.5">
+              <span id="priceVip" class="font-serif text-4xl sm:text-5xl font-bold text-ivory">$34</span>
+              <span id="periodVip" class="text-xs text-silver">/ month</span>
+            </div>
+            <ul class="space-y-3.5 text-sm text-ivory mb-8">
+              <li class="flex items-center gap-3"><span class="text-roseaccent">✓</span> Everything in Standard Pass</li>
+              <li class="flex items-center gap-3"><span class="text-roseaccent">✓</span> Uncompressed 4K 60fps HDR Bitrate</li>
+              <li class="flex items-center gap-3"><span class="text-roseaccent">✓</span> Unlimited VIP Exclusive Releases</li>
+              <li class="flex items-center gap-3"><span class="text-roseaccent">✓</span> Offline Mobile &amp; Desktop Downloads</li>
+              <li class="flex items-center gap-3"><span class="text-champagne">★</span> Behind-the-Scenes Director Diaries</li>
+            </ul>
+          </div>
+          <button
+            type="button"
+            data-aff-sub="plan_vip_noir"
+            onclick="handleSmartAffiliateClick(event, 'VIP Noir', 'plan_vip_noir', null, () => openCheckoutModal('VIP Noir', document.getElementById('priceVip').innerText + ' ' + document.getElementById('periodVip').innerText))"
+            class="w-full py-4 rounded-xl bg-gradient-to-r from-crimson to-roseaccent hover:brightness-110 text-white font-bold text-sm tracking-wide transition shadow-rose-glow cursor-pointer"
+          >
+            Select Plan
+          </button>
+        </div>
+
+        <!-- Card 3: Obsidian All-Access ($59/mo) -->
+        <div class="rounded-2xl glass-card p-7 sm:p-8 flex flex-col justify-between hover:border-champagne/40 transition">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-serif text-2xl font-semibold text-champagne">Obsidian All-Access</h3>
+              <span class="px-3 py-1 rounded-full text-xs bg-champagne/10 text-champagne border border-champagne/25">Ultimate</span>
+            </div>
+            <p class="text-xs sm:text-sm text-silver mb-6">Complete backstage privilege including 8K VR cinema and live muse salon invites.</p>
+            <div class="mb-6 flex items-baseline gap-1.5">
+              <span id="priceObsidian" class="font-serif text-4xl sm:text-5xl font-bold text-ivory">$59</span>
+              <span id="periodObsidian" class="text-xs text-silver">/ month</span>
+            </div>
+            <ul class="space-y-3.5 text-sm text-ivory/90 mb-8">
+              <li class="flex items-center gap-3"><span class="text-champagne">✓</span> Everything in VIP Noir</li>
+              <li class="flex items-center gap-3"><span class="text-champagne">✓</span> Full 8K 180° VR Experience Library</li>
+              <li class="flex items-center gap-3"><span class="text-champagne">✓</span> Private Live Muse Q&amp;A Salons</li>
+              <li class="flex items-center gap-3"><span class="text-champagne">✓</span> Custom Scene Request Voting</li>
+              <li class="flex items-center gap-3"><span class="text-champagne">✓</span> 24/7 Priority Concierge Line</li>
+            </ul>
+          </div>
+          <button
+            type="button"
+            data-aff-sub="plan_obsidian_all_access"
+            onclick="handleSmartAffiliateClick(event, 'Obsidian All-Access', 'plan_obsidian_all_access', null, () => openCheckoutModal('Obsidian All-Access', document.getElementById('priceObsidian').innerText + ' ' + document.getElementById('periodObsidian').innerText))"
+            class="w-full py-3.5 rounded-xl bg-champagne/15 hover:bg-champagne/25 border border-champagne/40 text-champagne font-semibold text-sm transition cursor-pointer"
+          >
+            Select Plan
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 8. ABOUT US SECTION ==================== -->
+  <section id="about" class="py-16 sm:py-24 bg-elevated/60 border-y border-white/[0.08] reveal-up">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      <!-- Left Editorial Visual -->
+      <div class="lg:col-span-6 relative">
+        <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/3] relative">
+          <div id="aboutEditorialVisual" class="w-full h-full"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent"></div>
+          <div class="absolute bottom-5 left-5 right-5 p-4 rounded-2xl glass-card">
+            <p class="font-serif italic text-lg text-ivory">“Sensuality is lighting, pacing, trust, and genuine chemistry.”</p>
+            <p class="text-xs text-champagne mt-1">— Nocturne Creative Direction, Paris &amp; New York</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Story & Stats -->
+      <div class="lg:col-span-6">
+        <span class="text-xs uppercase tracking-[0.25em] text-roseaccent font-semibold">Our Philosophy</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-ivory mt-2 mb-5">
+          Redefining Luxury <span class="italic text-roseaccent">Adult Cinema</span>
+        </h2>
+        <p class="text-sm sm:text-base text-silver leading-relaxed mb-4">
+          Founded by independent cinematographers, stylists, and performers, <strong class="text-ivory">NOCTURNE</strong> treats intimacy as an elevated visual art form. Every production is shot on cinema optics with deliberate lighting, rich soundscapes, and unhurried narrative tension.
+        </p>
+        <p class="text-sm sm:text-base text-silver leading-relaxed mb-8">
+          We uphold strict ethical standards: every featured model is a verified consenting adult, retains creative agency, and receives transparent revenue participation alongside industry-leading member privacy protections.
+        </p>
+
+        <!-- Stats Row -->
+        <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10">
+          <div>
+            <p class="font-serif text-3xl sm:text-4xl font-bold text-ivory">4K+</p>
+            <p class="text-xs text-silver mt-1">Cinema Releases</p>
+          </div>
+          <div>
+            <p class="font-serif text-3xl sm:text-4xl font-bold text-roseaccent">120+</p>
+            <p class="text-xs text-silver mt-1">Verified Creators</p>
+          </div>
+          <div>
+            <p class="font-serif text-3xl sm:text-4xl font-bold text-champagne">99.9%</p>
+            <p class="text-xs text-silver mt-1">Discreet Privacy</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 9. CONTACT / SUPPORT SECTION ==================== -->
+  <section id="support" class="py-16 sm:py-24 reveal-up">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs uppercase tracking-[0.25em] text-roseaccent font-semibold">24/7 Discreet Concierge</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-ivory mt-2 mb-3">
+          Member <span class="italic text-roseaccent">Support &amp; FAQ</span>
+        </h2>
+        <p class="text-sm sm:text-base text-silver">
+          Questions about billing privacy, streaming quality, or creator verification? Reach our concierge team directly.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <!-- Left: Interactive FAQ Accordion -->
+        <div class="lg:col-span-6 space-y-3.5" id="faqAccordion">
+          <!-- FAQ 1 -->
+          <div class="rounded-2xl glass-card overflow-hidden">
+            <button type="button" class="faq-trigger w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 text-sm sm:text-base font-semibold text-ivory hover:text-roseaccent transition cursor-pointer" aria-expanded="true">
+              <span>How discreet does billing appear on my bank statement?</span>
+              <span class="faq-icon text-roseaccent text-xl leading-none">−</span>
+            </button>
+            <div class="faq-content px-6 pb-5 text-xs sm:text-sm text-silver leading-relaxed">
+              All memberships bill under a neutral corporate descriptor (<strong class="text-ivory">NCTRNE DIGITAL</strong>) with zero mention of adult content or platform branding.
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="rounded-2xl glass-card overflow-hidden">
+            <button type="button" class="faq-trigger w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 text-sm sm:text-base font-semibold text-ivory hover:text-roseaccent transition cursor-pointer" aria-expanded="false">
+              <span>Can I cancel or switch between Monthly and Annual plans?</span>
+              <span class="faq-icon text-roseaccent text-xl leading-none">+</span>
+            </button>
+            <div class="faq-content hidden px-6 pb-5 text-xs sm:text-sm text-silver leading-relaxed">
+              Yes. You can manage, upgrade, downgrade, or cancel your membership anytime in one click from your account settings with no awkward retention loops.
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="rounded-2xl glass-card overflow-hidden">
+            <button type="button" class="faq-trigger w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 text-sm sm:text-base font-semibold text-ivory hover:text-roseaccent transition cursor-pointer" aria-expanded="false">
+              <span>What devices support 4K 60fps and 8K VR playback?</span>
+              <span class="faq-icon text-roseaccent text-xl leading-none">+</span>
+            </button>
+            <div class="faq-content hidden px-6 pb-5 text-xs sm:text-sm text-silver leading-relaxed">
+              Our adaptive HLS player runs smoothly on desktop browsers, iOS &amp; Android devices, smart TVs, and popular standalone VR headsets.
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="rounded-2xl glass-card overflow-hidden">
+            <button type="button" class="faq-trigger w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 text-sm sm:text-base font-semibold text-ivory hover:text-roseaccent transition cursor-pointer" aria-expanded="false">
+              <span>How do performers apply to become a verified Nocturne Muse?</span>
+              <span class="faq-icon text-roseaccent text-xl leading-none">+</span>
+            </button>
+            <div class="faq-content hidden px-6 pb-5 text-xs sm:text-sm text-silver leading-relaxed">
+              Select “Creator Verification” in the contact form on the right. Every applicant undergoes strict age and consent verification prior to onboarding.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Contact / Support Form -->
+        <div class="lg:col-span-6 rounded-2xl glass-card p-6 sm:p-8">
+          <h3 class="font-serif text-2xl font-semibold text-ivory mb-1">Send a Private Message</h3>
+          <p class="text-xs sm:text-sm text-silver mb-6">Average response time is under 2 hours.</p>
+
+          <form id="supportForm" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="supportName" class="block text-xs font-medium text-silver mb-1.5">Your Name</label>
+                <input id="supportName" type="text" required placeholder="Julian Vance" class="w-full px-4 py-3 rounded-xl bg-obsidian/80 border border-white/10 focus:border-roseaccent focus:outline-none text-sm text-ivory placeholder-silver/60" />
+              </div>
+              <div>
+                <label for="supportEmail" class="block text-xs font-medium text-silver mb-1.5">Email Address</label>
+                <input id="supportEmail" type="email" required placeholder="julian@example.com" class="w-full px-4 py-3 rounded-xl bg-obsidian/80 border border-white/10 focus:border-roseaccent focus:outline-none text-sm text-ivory placeholder-silver/60" />
+              </div>
+            </div>
+
+            <div>
+              <label for="supportTopic" class="block text-xs font-medium text-silver mb-1.5">Topic</label>
+              <select id="supportTopic" class="w-full px-4 py-3 rounded-xl bg-obsidian/80 border border-white/10 focus:border-roseaccent focus:outline-none text-sm text-ivory cursor-pointer">
+                <option value="Membership & Billing">Membership &amp; Discreet Billing</option>
+                <option value="Streaming & 4K Playback">Streaming &amp; 4K Playback</option>
+                <option value="Privacy & Data Request">Privacy &amp; Data Request</option>
+                <option value="Creator Verification">Creator Verification</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="supportMessage" class="block text-xs font-medium text-silver mb-1.5">Message</label>
+              <textarea id="supportMessage" rows="4" required placeholder="How can our concierge assist you tonight?" class="w-full px-4 py-3 rounded-xl bg-obsidian/80 border border-white/10 focus:border-roseaccent focus:outline-none text-sm text-ivory placeholder-silver/60"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-crimson to-roseaccent hover:brightness-110 text-white font-semibold text-sm tracking-wide shadow-rose-glow transition cursor-pointer">
+              Send Discreet Inquiry
+            </button>
+          </form>
+
+          <!-- Confirmation State -->
+          <div id="supportConfirmation" class="hidden mt-5 p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-200 text-xs sm:text-sm">
+            <p class="font-semibold mb-1">✓ Inquiry Received</p>
+            <p id="supportConfirmationText" class="text-emerald-200/80">Thank you. Our concierge team has logged your private message and will reply shortly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 10. COMPREHENSIVE FOOTER ==================== -->
+  <footer id="footer" class="bg-elevated border-t border-white/[0.08] pt-14 pb-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Footer Banner Ad Above Legal / 2257 Footer -->
+      <div class="mb-10 rounded-2xl bg-obsidian/90 border border-white/10 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <span class="px-2.5 py-1 rounded bg-champagne/15 border border-champagne/30 text-champagne text-[10px] font-bold uppercase tracking-widest shrink-0">
+            Partner Ad
+          </span>
+          <div>
+            <p class="text-xs sm:text-sm font-medium text-ivory">
+              Sovereign Vault VPN &amp; Encrypted Browsing for Private Streaming
+            </p>
+            <p class="text-[11px] text-silver">
+              Dedicated European &amp; North American endpoints optimized for high-bitrate 4K playback.
+            </p>
+          </div>
+        </div>
+        <a
+          href="#membership"
+          data-aff-sub="footer_partner_banner"
+          onclick="handleSmartAffiliateClick(event, 'Sovereign Vault Partner Offer', 'footer_partner_banner', '#membership')"
+          class="px-4 py-2 rounded-xl bg-white/5 hover:bg-crimson text-ivory hover:text-white border border-white/10 text-xs font-semibold transition shrink-0"
+        >
+          View Offer →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-white/[0.08]">
+        <!-- Brand Column -->
+        <div class="md:col-span-2">
+          <a href="#home" class="font-serif text-3xl font-semibold tracking-[0.14em] text-ivory">NOCTURNE</a>
+          <p class="text-xs sm:text-sm text-silver mt-3 max-w-md leading-relaxed">
+            An independent luxury adult cinema and creator platform dedicated to refined aesthetics, 4K visual fidelity, and strict member discretion.
+          </p>
+          <div class="flex items-center gap-2 mt-4 text-xs text-champagne">
+            <span>✦ 18+ Adults Only</span>
+            <span>•</span>
+            <span>SSL Encrypted</span>
+            <span>•</span>
+            <span>4K 60fps HDR</span>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest text-ivory mb-4">Platform</h4>
+          <ul class="space-y-2.5 text-xs sm:text-sm text-silver">
+            <li><a href="#featured" class="hover:text-roseaccent transition">Featured Releases</a></li>
+            <li><a href="#categories" class="hover:text-roseaccent transition">Categories</a></li>
+            <li><a href="#models" class="hover:text-roseaccent transition">Exclusive Muses</a></li>
+            <li><a href="#membership" class="hover:text-roseaccent transition">VIP Membership</a></li>
+            <li><a href="#about" class="hover:text-roseaccent transition">About Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Compliance -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest text-ivory mb-4">Legal &amp; Support</h4>
+          <ul class="space-y-2.5 text-xs sm:text-sm text-silver">
+            <li><a href="#support" class="hover:text-roseaccent transition">24/7 Concierge Support</a></li>
+            <li><a href="#footer" onclick="showToast('Terms of Service: 18+ adult access only.')" class="hover:text-roseaccent transition">Terms of Service</a></li>
+            <li><a href="#footer" onclick="showToast('Privacy Policy: Zero third-party tracking sale.')" class="hover:text-roseaccent transition">Privacy Policy</a></li>
+            <li><a href="#footer" onclick="showToast('DMCA & Non-Consensual Content Zero-Tolerance Policy')" class="hover:text-roseaccent transition">DMCA &amp; Consent Policy</a></li>
+            <li><a href="#footer" onclick="showToast('18 U.S.C. § 2257 Exemption & Records Statement')" class="hover:text-roseaccent transition">18 U.S.C. 2257 Statement</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 18 U.S.C. 2257 Compliance & Copyright -->
+      <div class="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[11px] text-silver/80">
+        <p class="max-w-3xl leading-relaxed">
+          <strong class="text-ivory/90">18 U.S.C. § 2257 Compliance Notice:</strong> All models, performers, and visual appearances depicted on this website were at least eighteen (18) years of age at the time of photography or production. Records required pursuant to 18 U.S.C. § 2257 and associated regulations are maintained by the custodian of records.
+        </p>
+        <p class="shrink-0">© <span id="yearSpan">2026</span> NOCTURNE. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== 11. CUSTOM 4K CINEMA VIDEO PLAYER MODAL ==================== -->
+  <div id="videoPlayerModal" role="dialog" aria-modal="true" aria-labelledby="playerTitle" class="fixed inset-0 z-[80] hidden flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl overflow-y-auto">
+    <div class="w-full max-w-4xl rounded-3xl bg-elevated border border-white/15 overflow-hidden shadow-2xl my-auto">
+      <!-- Top Bar -->
+      <div class="flex items-center justify-between px-5 sm:px-7 py-4 border-b border-white/10 bg-surface/60">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <span id="playerBadge" class="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-crimson text-white shrink-0">4K VIP</span>
+          <h3 id="playerTitle" class="font-serif text-xl sm:text-2xl font-semibold text-ivory truncate">Film Title</h3>
+        </div>
+        <button id="closeVideoModalBtn" type="button" aria-label="Close Video Player" class="p-2 rounded-xl bg-white/5 hover:bg-white/15 text-silver hover:text-ivory transition cursor-pointer">✕</button>
+      </div>
+
+      <!-- Simulated High-Craft Cinema Viewport -->
+      <div class="relative aspect-video bg-black overflow-hidden group select-none">
+        <div id="playerPosterLayer" class="w-full h-full transition-transform duration-700"></div>
+        <div class="pointer-events-none absolute -bottom-16 -left-16 w-80 h-80 rounded-full bg-crimson/25 blur-3xl cinema-ambient-orb"></div>
+        <div class="pointer-events-none absolute -top-16 -right-16 w-72 h-72 rounded-full bg-champagne/20 blur-3xl cinema-ambient-orb"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/40"></div>
+
+        <!-- Center Play/Pause Overlay Button -->
+        <button id="centerPlayBtn" type="button" aria-label="Toggle Play or Pause" class="absolute inset-0 m-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-crimson/90 hover:bg-roseaccent text-white flex items-center justify-center shadow-rose-glow transition transform hover:scale-105 cursor-pointer">
+          <svg id="centerPlayIcon" class="w-8 h-8 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+
+        <!-- Bottom Player Controls Bar -->
+        <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 bg-gradient-to-t from-black via-black/80 to-transparent">
+          <!-- Scrubber -->
+          <input id="playerScrubber" type="range" min="0" max="100" value="24" aria-label="Seek Timeline" class="nocturne-slider w-full mb-3" />
+
+          <div class="flex flex-wrap items-center justify-between gap-3 text-xs text-ivory">
+            <div class="flex items-center gap-3 sm:gap-4">
+              <button id="controlPlayBtn" type="button" class="font-semibold hover:text-roseaccent transition cursor-pointer">Pause</button>
+              <button id="muteToggleBtn" type="button" aria-label="Toggle Mute" class="px-2 py-1 rounded bg-white/10 hover:bg-white/15 text-ivory transition cursor-pointer">
+                🔊 Sound On
+              </button>
+              <span id="playerTimeDisplay" class="font-mono text-silver">07:12 / 28:40</span>
+            </div>
+
+            <div class="flex items-center gap-2.5 sm:gap-3">
+              <button id="likeVideoBtn" type="button" class="px-3 py-1 rounded-lg bg-white/10 hover:bg-crimson/30 border border-white/10 flex items-center gap-1.5 transition cursor-pointer">
+                <span id="likeHeartIcon" class="text-roseaccent">♥</span>
+                <span id="playerLikesCount">12.4K</span>
+              </button>
+
+              <select id="qualitySelect" aria-label="Video Quality" class="px-2.5 py-1 rounded-lg bg-obsidian/90 border border-white/15 text-xs text-champagne font-semibold focus:outline-none cursor-pointer">
+                <option value="4K 60fps HDR">4K 60fps HDR</option>
+                <option value="1080p Full HD">1080p Full HD</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Film Details, Creator Bio & Up Next -->
+      <div class="p-5 sm:p-7 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-7">
+          <div class="flex items-center gap-3 mb-3">
+            <div id="playerModelAvatar" class="w-11 h-11 rounded-full overflow-hidden border border-roseaccent/50 shrink-0"></div>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <button id="playerModelNameBtn" type="button" class="font-semibold text-sm text-ivory hover:text-roseaccent transition cursor-pointer">Model Name</button>
+                <span class="w-4 h-4 rounded-full bg-roseaccent text-white text-[10px] flex items-center justify-center font-bold">✓</span>
+                <span id="playerPartnerTag" class="hidden px-2 py-0.5 rounded bg-champagne/15 text-champagne text-[10px] font-semibold uppercase">Sponsored Partner</span>
+              </div>
+              <p id="playerModelMeta" class="text-xs text-silver">Paris • 98% Match</p>
+            </div>
+          </div>
+
+          <p id="playerDescription" class="text-sm text-silver leading-relaxed mb-4">
+            Film description goes here.
+          </p>
+
+          <div id="playerTags" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- Up Next Suggestions -->
+        <div class="lg:col-span-5 lg:border-l lg:border-white/10 lg:pl-6">
+          <h4 class="text-xs font-bold uppercase tracking-widest text-champagne mb-3">Up Next in Nocturne</h4>
+          <div id="upNextList" class="space-y-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 12. MODEL PROFILE MODAL ==================== -->
+  <div id="modelProfileModal" role="dialog" aria-modal="true" aria-labelledby="modelModalName" class="fixed inset-0 z-[85] hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl overflow-y-auto">
+    <div class="w-full max-w-2xl rounded-3xl bg-elevated border border-white/15 p-6 sm:p-8 shadow-2xl relative my-auto">
+      <button id="closeModelModalBtn" type="button" aria-label="Close Model Profile" class="absolute top-5 right-5 p-2 rounded-xl bg-white/5 hover:bg-white/15 text-silver hover:text-ivory cursor-pointer">✕</button>
+
+      <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 pb-6 border-b border-white/10">
+        <div id="modelModalAvatar" class="w-24 h-24 rounded-2xl overflow-hidden border-2 border-champagne/50 shrink-0 shadow-gold-glow"></div>
+        <div class="text-center sm:text-left">
+          <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-roseaccent/15 border border-roseaccent/30 text-roseaccent text-xs font-semibold mb-2">
+            <span>✓ Verified Nocturne Muse</span>
+          </div>
+          <h3 id="modelModalName" class="font-serif text-3xl font-bold text-ivory">Model Name</h3>
+          <p id="modelModalOrigin" class="text-xs sm:text-sm text-silver mt-0.5">Origin • Followers</p>
+          <p id="modelModalBio" class="text-xs sm:text-sm text-ivory/85 mt-3 leading-relaxed">Bio text</p>
+        </div>
+      </div>
+
+      <div class="pt-5">
+        <h4 class="text-xs font-bold uppercase tracking-widest text-champagne mb-3.5">Featured Filmography</h4>
+        <div id="modelFilmsList" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 13. DISCREET MEMBERSHIP CHECKOUT PREVIEW MODAL ==================== -->
+  <div id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutPlanTitle" class="fixed inset-0 z-[85] hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl">
+    <div class="w-full max-w-md rounded-3xl bg-elevated border border-crimson/40 p-6 sm:p-8 shadow-2xl relative">
+      <button id="closeCheckoutModalBtn" type="button" aria-label="Close Checkout Modal" class="absolute top-4 right-4 p-2 rounded-lg text-silver hover:text-ivory cursor-pointer">✕</button>
+      <span class="text-xs uppercase tracking-widest text-champagne font-semibold">Discreet Checkout Preview</span>
+      <h3 id="checkoutPlanTitle" class="font-serif text-3xl font-bold text-ivory mt-1">VIP Noir</h3>
+      <p id="checkoutPlanPrice" class="text-sm text-roseaccent font-semibold mb-5">$34 / month</p>
+
+      <div class="p-4 rounded-xl bg-obsidian/90 border border-white/10 text-xs text-silver space-y-2 mb-6">
+        <p class="flex justify-between"><span>Billing Descriptor:</span> <strong class="text-ivory">NCTRNE DIGITAL</strong></p>
+        <p class="flex justify-between"><span>Encryption:</span> <strong class="text-emerald-400">256-Bit TLS Active</strong></p>
+        <p class="flex justify-between"><span>Cancellation:</span> <strong class="text-ivory">Anytime in 1 Click</strong></p>
+      </div>
+
+      <form id="checkoutForm" class="space-y-3.5">
+        <input type="email" required placeholder="Enter member email for instant pass" class="w-full px-4 py-3 rounded-xl bg-obsidian border border-white/15 focus:border-roseaccent focus:outline-none text-sm text-ivory" />
+        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-crimson to-roseaccent text-white font-semibold text-sm shadow-rose-glow cursor-pointer">
+          Confirm Discreet Pass
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== TIMED / EXIT-INTENT PROMO POP-UP AD MODAL ==================== -->
+  <div id="promoIntentModal" role="dialog" aria-modal="true" aria-labelledby="promoIntentTitle" class="fixed inset-0 z-[88] hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="relative w-full max-w-lg rounded-2xl bg-elevated border border-crimson/45 p-6 sm:p-8 shadow-2xl overflow-hidden">
+      <div class="pointer-events-none absolute -top-20 -right-20 w-56 h-56 bg-crimson/20 rounded-full blur-3xl"></div>
+      <div class="relative z-10">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded bg-crimson/20 border border-crimson/40 text-roseaccent text-[10px] font-bold uppercase tracking-widest">
+              Sponsored Offer
+            </span>
+            <span id="promoTriggerLabel" class="text-[11px] text-champagne">Member Spotlight</span>
+          </div>
+          <button
+            id="closePromoIntentBtn"
+            type="button"
+            aria-label="Close promotional offer"
+            class="p-1.5 rounded-lg text-silver hover:text-ivory hover:bg-white/5 transition cursor-pointer"
+          >
+            ✕
+          </button>
+        </div>
+
+        <h3 id="promoIntentTitle" class="font-serif text-2xl sm:text-3xl font-semibold text-ivory mb-2">
+          Before You Step Out of <span class="italic rose-gradient-text">Nocturne</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-silver leading-relaxed mb-5">
+          Enjoy complimentary access to our <strong class="text-ivory">After Hours 4K Anthology</strong> and save up to <strong class="text-champagne">40% on Annual VIP Noir</strong> with discreet <strong class="text-ivory">NCTRNE DIGITAL</strong> billing.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a
+            href="#membership"
+            data-aff-sub="intent_popup_claim"
+            onclick="dismissPromoIntentModal(); handleSmartAffiliateClick(event, 'Nocturne 40% VIP Intent Offer', 'intent_popup_claim', '#membership')"
+            class="flex-1 py-3 px-5 rounded-xl bg-gradient-to-r from-crimson to-roseaccent hover:brightness-110 text-white text-center text-xs sm:text-sm font-semibold shadow-rose-glow transition"
+          >
+            Claim Member Offer
+          </a>
+          <button
+            id="snoozePromoIntentBtn"
+            type="button"
+            class="py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-silver hover:text-ivory text-xs sm:text-sm font-medium transition cursor-pointer"
+          >
+            Maybe Later
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SMART AFFILIATE REDIRECT PREVIEW MODAL ==================== -->
+  <div id="affiliateRedirectModal" role="dialog" aria-modal="true" aria-labelledby="affDestinationTitle" class="fixed inset-0 z-[90] hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl">
+    <div class="w-full max-w-md rounded-2xl bg-elevated border border-champagne/40 p-6 sm:p-7 shadow-2xl relative">
+      <button id="closeAffiliateModalBtn" type="button" aria-label="Close Affiliate Preview" class="absolute top-4 right-4 p-2 rounded-lg text-silver hover:text-ivory cursor-pointer">✕</button>
+      <div class="flex items-center gap-2 mb-2">
+        <span class="px-2 py-0.5 rounded bg-champagne/15 border border-champagne/30 text-champagne text-[10px] font-bold uppercase tracking-widest">
+          Smart Tracking Link
+        </span>
+      </div>
+      <h3 id="affDestinationTitle" class="font-serif text-2xl font-bold text-ivory mb-1">Partner Destination</h3>
+      <p class="text-xs text-silver mb-4">Attribution parameters generated for this session:</p>
+
+      <div id="affTrackingUrlPreview" class="p-3.5 rounded-xl bg-obsidian border border-white/10 font-mono text-[11px] text-roseaccent break-all mb-5">
+        ?ref=nocturne_vip&amp;aff_sub=default
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button
+          id="affProceedBtn"
+          type="button"
+          class="flex-1 py-3 px-5 rounded-xl bg-gradient-to-r from-crimson to-roseaccent hover:brightness-110 text-white text-xs sm:text-sm font-semibold shadow-rose-glow transition cursor-pointer"
+        >
+          Continue with Tracking
+        </button>
+        <button
+          id="affCancelBtn"
+          type="button"
+          class="py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-silver text-xs sm:text-sm transition cursor-pointer"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    // ---------- SELF-CONTAINED SVG ARTWORK GENERATOR ----------
+    function createArtworkMarkup(seedId, title, accentHex, secondaryHex, badgeText, isAvatar = false) {
+      const safeTitle = String(title || 'NOCTURNE').replace(/[<>&"]/g, '');
+      const initials = safeTitle
+        .split(' ')
+        .filter(Boolean)
+        .slice(0, 2)
+        .map(w => w[0].toUpperCase())
+        .join('') || 'N';
+
+      if (isAvatar) {
+        return `
+          <svg class="w-full h-full object-cover" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="av_${seedId}" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#18181E" />
+                <stop offset="60%" stop-color="${accentHex}" stop-opacity="0.45" />
+                <stop offset="100%" stop-color="${secondaryHex}" stop-opacity="0.35" />
+              </linearGradient>
+            </defs>
+            <rect width="160" height="160" fill="url(#av_${seedId})" />
+            <circle cx="80" cy="80" r="58" fill="none" stroke="${secondaryHex}" stroke-opacity="0.35" stroke-width="1.5" />
+            <circle cx="80" cy="64" r="24" fill="#F5F3F0" fill-opacity="0.14" stroke="#F5F3F0" stroke-opacity="0.25" stroke-width="1" />
+            <path d="M36 138 C42 108, 118 108, 124 138" fill="#F5F3F0" fill-opacity="0.12" />
+            <text x="80" y="71" text-anchor="middle" fill="#F5F3F0" font-family="Cormorant Garamond, Georgia, serif" font-size="24" font-weight="700" letter-spacing="2">${initials}</text>
+          </svg>
+        `;
+      }
+
+      return `
+        <svg class="w-full h-full object-cover" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bg_${seedId}" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0B0B0F" />
+              <stop offset="52%" stop-color="#1A0E15" />
+              <stop offset="100%" stop-color="#111116" />
+            </linearGradient>
+            <radialGradient id="glowA_${seedId}" cx="28%" cy="35%" r="55%">
+              <stop offset="0%" stop-color="${accentHex}" stop-opacity="0.48" />
+              <stop offset="100%" stop-color="#08080A" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="glowB_${seedId}" cx="78%" cy="72%" r="45%">
+              <stop offset="0%" stop-color="${secondaryHex}" stop-opacity="0.28" />
+              <stop offset="100%" stop-color="#08080A" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <rect width="800" height="450" fill="url(#bg_${seedId})" />
+          <rect width="800" height="450" fill="url(#glowA_${seedId})" />
+          <rect width="800" height="450" fill="url(#glowB_${seedId})" />
+          <ellipse cx="560" cy="225" rx="185" ry="120" fill="none" stroke="${secondaryHex}" stroke-opacity="0.22" stroke-width="1.5" />
+          <ellipse cx="560" cy="225" rx="125" ry="78" fill="none" stroke="${accentHex}" stroke-opacity="0.28" stroke-width="1" stroke-dasharray="6 6" />
+          <line x1="64" y1="384" x2="736" y2="384" stroke="#F5F3F0" stroke-opacity="0.1" stroke-width="1" />
+          <text x="64" y="96" fill="${secondaryHex}" font-family="Plus Jakarta Sans, sans-serif" font-size="13" font-weight="700" letter-spacing="4">${String(badgeText || 'NOCTURNE 4K').replace(/[<>&"]/g, '')}</text>
+          <text x="64" y="242" fill="#F5F3F0" font-family="Cormorant Garamond, Georgia, serif" font-size="44" font-weight="600">${safeTitle.slice(0, 32)}</text>
+        </svg>
+      `;
+    }
+
+    // ---------- DATA STORE ----------
+    const modelsData = [
+      {
+        id: 'm1',
+        name: 'Elena Rostova',
+        origin: 'Paris, France',
+        followers: '482K',
+        accent: '#E11D48',
+        secondary: '#D4AF37',
+        bio: 'Editorial muse and former contemporary dancer known for chiaroscuro lighting, poised elegance, and slow-burn atmospheric cinema.'
+      },
+      {
+        id: 'm2',
+        name: 'Camille Laurent',
+        origin: 'Lyon, France',
+        followers: '369K',
+        accent: '#F43F5E',
+        secondary: '#D4AF37',
+        bio: 'French cinema actress bringing effortless allure, intimate dialogue, and warm nocturnal energy to Nocturne originals.'
+      },
+      {
+        id: 'm3',
+        name: 'Sienna Vance',
+        origin: 'New York, USA',
+        followers: '518K',
+        accent: '#E11D48',
+        secondary: '#F5F3F0',
+        bio: 'Manhattan penthouse regular starring in late-night jazz lounges, velvet suites, and high-contrast 4K vignettes.'
+      },
+      {
+        id: 'm4',
+        name: 'Aria Sterling',
+        origin: 'London, UK',
+        followers: '294K',
+        accent: '#BE123C',
+        secondary: '#D4AF37',
+        bio: 'Sculptural presence and candid backstage warmth featured across Nocturne’s director diary and VIP collections.'
+      },
+      {
+        id: 'm5',
+        name: 'Valeria Moretti',
+        origin: 'Milan, Italy',
+        followers: '437K',
+        accent: '#F43F5E',
+        secondary: '#D4AF37',
+        bio: 'Milanese fashion muse celebrated for opulent wardrobe styling, dramatic shadows, and magnetic screen chemistry.'
+      },
+      {
+        id: 'm6',
+        name: 'Noemi Laurent',
+        origin: 'Monte Carlo',
+        followers: '315K',
+        accent: '#E11D48',
+        secondary: '#D4AF37',
+        bio: 'Riviera yacht and twilight terrace specialist crafting immersive 8K VR and golden-hour noir experiences.'
+      }
+    ];
+
+    const videosData = [
+      {
+        id: 'v1',
+        title: 'Midnight in Montmartre',
+        modelId: 'm1',
+        category: 'Editorial',
+        duration: '28:40',
+        badge: '4K VIP',
+        views: '428K',
+        viewsNum: 428000,
+        rating: 99,
+        likes: '14.2K',
+        accent: '#E11D48',
+        secondary: '#D4AF37',
+        description: 'Shot on anamorphic lenses across a rain-slicked Parisian apartment at 2 AM. Elena Rostova commands every frame with quiet intensity.',
+        tags: ['4K 60fps', 'Paris Noir', 'Editorial']
+      },
+      {
+        id: 'v2',
+        title: 'Velvet Room Confession',
+        modelId: 'm2',
+        category: 'After Hours',
+        duration: '34:15',
+        badge: '4K HDR',
+        views: '319K',
+        viewsNum: 319000,
+        rating: 98,
+        likes: '11.8K',
+        accent: '#F43F5E',
+        secondary: '#D4AF37',
+        description: 'Candlelit intimacy and whispered secrets inside a crimson-draped salon. Pure late-night atmosphere with spatial audio.',
+        tags: ['After Hours', 'HDR10', 'Sensual']
+      },
+      {
+        id: 'v3',
+        title: 'Crimson Suite No. 9',
+        modelId: 'm3',
+        category: 'VIP Exclusive',
+        duration: '41:08',
+        badge: 'VIP ONLY',
+        views: '542K',
+        viewsNum: 542000,
+        rating: 99,
+        likes: '19.6K',
+        accent: '#E11D48',
+        secondary: '#F5F3F0',
+        description: 'High above Manhattan, Sienna Vance stars in an unhurried, deeply sensual suite study crafted exclusively for VIP Noir members.',
+        tags: ['VIP Exclusive', 'Penthouse', '4K Cinema']
+      },
+      {
+        id: 'v4',
+        title: 'Golden Hour Obsession',
+        modelId: 'm5',
+        category: '4K Cinema',
+        duration: '24:52',
+        badge: '4K 60FPS',
+        views: '276K',
+        viewsNum: 276000,
+        rating: 97,
+        likes: '9.9K',
+        accent: '#D4AF37',
+        secondary: '#F43F5E',
+        description: 'Warm amber sunlight fades into deep indigo dusk in Milan as Valeria Moretti moves between silk curtains and shadowed glass.',
+        tags: ['4K Cinema', 'Milan', 'Slow Burn']
+      },
+      {
+        id: 'v5',
+        title: 'Backstage: The Last Take',
+        modelId: 'm4',
+        category: 'Behind the Scenes',
+        duration: '19:30',
+        badge: 'BTS 4K',
+        views: '185K',
+        viewsNum: 185000,
+        rating: 96,
+        likes: '7.4K',
+        accent: '#BE123C',
+        secondary: '#D4AF37',
+        description: 'An unscripted look behind the camera in London—lighting setups, wardrobe fittings, and candid moments with Aria Sterling.',
+        tags: ['Behind the Scenes', 'Director Cut', 'London']
+      },
+      {
+        id: 'v6',
+        title: 'Riviera Yacht: 180° VR',
+        modelId: 'm6',
+        category: 'VR Experience',
+        duration: '32:18',
+        badge: '8K VR',
+        views: '264K',
+        viewsNum: 264000,
+        rating: 96,
+        likes: '9.3K',
+        accent: '#E11D48',
+        secondary: '#D4AF37',
+        description: 'Step aboard a private yacht off Monaco in stereoscopic 8K 180° VR alongside Noemi Laurent under the Mediterranean stars.',
+        tags: ['VR Experience', '8K VR', 'Monaco']
+      },
+      {
+        id: 'v7',
+        title: 'Silk & Shadows: Act II',
+        modelId: 'm1',
+        category: 'Editorial',
+        duration: '35:05',
+        badge: '4K VIP',
+        views: '390K',
+        viewsNum: 390000,
+        rating: 98,
+        likes: '13.5K',
+        accent: '#F43F5E',
+        secondary: '#D4AF37',
+        description: 'The highly anticipated second chapter of Elena Rostova’s Parisian noir trilogy.',
+        tags: ['Editorial', 'Paris', '4K Cinema']
+      },
+      {
+        id: 'v8',
+        title: 'Velvet Lounge: Midnight Session',
+        modelId: 'm3',
+        category: 'After Hours',
+        duration: '39:40',
+        badge: '4K HDR',
+        views: '312K',
+        viewsNum: 312000,
+        rating: 97,
+        likes: '10.9K',
+        accent: '#E11D48',
+        secondary: '#D4AF37',
+        description: 'Late-night vinyl records, dim amber lamps, and electric chemistry in a private Chelsea townhouse.',
+        tags: ['After Hours', '4K HDR', 'Intimate']
+      },
+      {
+        id: 'sp1',
+        title: 'Midnight Silk & Candlelight',
+        modelId: 'm2',
+        category: 'Editorial',
+        duration: '27:50',
+        badge: 'SPONSORED',
+        isSponsored: true,
+        partnerName: 'Maison Lumière',
+        views: '284K',
+        viewsNum: 284000,
+        rating: 97,
+        likes: '10.1K',
+        accent: '#D4AF37',
+        secondary: '#F43F5E',
+        description: 'Sponsored partner feature by Maison Lumière — an atmospheric study of warm amber lighting, evening couture, and private salon cinema.',
+        tags: ['Sponsored', 'Editorial', 'Partner']
+      },
+      {
+        id: 'sp2',
+        title: 'Velvet Horizon: Private Lounge',
+        modelId: 'm5',
+        category: 'VIP Exclusive',
+        duration: '36:15',
+        badge: 'SPONSORED',
+        isSponsored: true,
+        partnerName: 'Atelier Velours',
+        views: '345K',
+        viewsNum: 345000,
+        rating: 98,
+        likes: '12.7K',
+        accent: '#D4AF37',
+        secondary: '#E11D48',
+        description: 'Sponsored partner release from Atelier Velours showcasing private penthouse suites and ultra-high-bitrate streaming.',
+        tags: ['Sponsored', 'VIP Exclusive', 'Partner']
+      }
+    ];
+
+    const categories = [
+      'All Releases',
+      'Editorial',
+      'After Hours',
+      '4K Cinema',
+      'VIP Exclusive',
+      'Behind the Scenes',
+      'VR Experience'
+    ];
+
+    // ---------- STATE ----------
+    let activeCategory = 'All Releases';
+    let searchQuery = '';
+    let sortBy = 'featured';
+    let billingCycle = 'monthly';
+    let currentPlayingVideo = null;
+    let isPlaying = true;
+    let isMuted = false;
+    let likedVideos = new Set();
+
+    // ---------- INITIALIZATION ----------
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('yearSpan').textContent = new Date().getFullYear();
+
+      // Hydrate static editorial visuals with inline SVGs
+      const heroThumbEl = document.getElementById('heroPartnerThumb');
+      if (heroThumbEl) {
+        heroThumbEl.innerHTML = createArtworkMarkup('partner_hero', 'Maison Lumière', '#D4AF37', '#F43F5E', 'PARTNER 8K');
+      }
+      const aboutVisualEl = document.getElementById('aboutEditorialVisual');
+      if (aboutVisualEl) {
+        aboutVisualEl.innerHTML = createArtworkMarkup('about_atelier', 'Nocturne Atelier', '#E11D48', '#D4AF37', 'CINEMA OPTICS');
+      }
+
+      renderCategories();
+      renderVideos();
+      renderModels();
+      setupEventListeners();
+      setupAdPlacementsAndIntent();
+      initScrollReveal();
+    });
+
+    // ---------- SCROLL REVEAL ANIMATION ----------
+    function initScrollReveal() {
+      const reveals = document.querySelectorAll('.reveal-up');
+      if (!('IntersectionObserver' in window)) {
+        reveals.forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      reveals.forEach(el => observer.observe(el));
+    }
+
+    // ---------- RENDER CATEGORIES ----------
+    function renderCategories() {
+      const container = document.getElementById('categoryPills');
+      container.innerHTML = categories
+        .map(cat => {
+          const isActive = cat === activeCategory;
+          return `
+            <button
+              type="button"
+              role="tab"
+              aria-selected="${isActive}"
+              data-category="${cat}"
+              class="category-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-medium whitespace-nowrap transition cursor-pointer ${
+                isActive
+                  ? 'bg-gradient-to-r from-crimson to-roseaccent text-white shadow-rose-glow'
+                  : 'bg-elevated hover:bg-surface text-silver hover:text-ivory border border-white/10'
+              }"
+            >
+              ${cat}
+            </button>
+          `;
+        })
+        .join('');
+
+      container.querySelectorAll('.category-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeCategory = btn.dataset.category;
+          renderCategories();
+          renderVideos();
+        });
+      });
+    }
+
+    // ---------- RENDER FEATURED VIDEOS GRID ----------
+    function renderVideos() {
+      const grid = document.getElementById('videosGrid');
+      const emptyState = document.getElementById('emptyState');
+      const counter = document.getElementById('resultsCounter');
+      const heading = document.getElementById('sectionHeading');
+
+      const q = searchQuery.trim().toLowerCase();
+
+      let filtered = videosData.filter(video => {
+        const model = modelsData.find(m => m.id === video.modelId);
+        const matchesCat = activeCategory === 'All Releases' || video.category === activeCategory;
+        const matchesQuery =
+          !q ||
+          video.title.toLowerCase().includes(q) ||
+          video.category.toLowerCase().includes(q) ||
+          (video.partnerName && video.partnerName.toLowerCase().includes(q)) ||
+          (model && model.name.toLowerCase().includes(q)) ||
+          video.tags.some(t => t.toLowerCase().includes(q));
+        return matchesCat && matchesQuery;
+      });
+
+      if (sortBy === 'popular') {
+        filtered = [...filtered].sort((a, b) => b.viewsNum - a.viewsNum);
+      } else if (sortBy === 'rating') {
+        filtered = [...filtered].sort((a, b) => b.rating - a.rating);
+      }
+
+      heading.innerHTML =
+        activeCategory === 'All Releases'
+          ? 'Featured <span class="italic text-roseaccent">Midnight Releases</span>'
+          : `${activeCategory} <span class="italic text-roseaccent">Collection</span>`;
+
+      counter.textContent = `Showing ${filtered.length} ${filtered.length === 1 ? 'release' : 'releases'}`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+
+      grid.innerHTML = filtered
+        .map(video => {
+          const model = modelsData.find(m => m.id === video.modelId) || modelsData[0];
+          const cardBorderClass = video.isSponsored
+            ? 'border-champagne/30 hover:border-champagne/60'
+            : 'border-white/[0.08] hover:border-roseaccent/45';
+
+          return `
+            <article data-video-id="${video.id}" class="cinema-card group rounded-2xl glass-card ${cardBorderClass} overflow-hidden transition duration-300 cursor-pointer flex flex-col justify-between">
+              <div>
+                <!-- Thumbnail -->
+                <div class="relative aspect-video overflow-hidden bg-surface">
+                  <div class="cinema-thumb w-full h-full transition duration-500">
+                    ${createArtworkMarkup(video.id, video.title, video.accent, video.secondary, video.isSponsored ? 'SPONSORED PARTNER' : video.badge, false)}
+                  </div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/25"></div>
+
+                  <!-- 4K / VIP / Sponsored Badge -->
+                  <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase ${
+                    video.isSponsored
+                      ? 'bg-obsidian/90 text-champagne border border-champagne/45'
+                      : video.badge.includes('VIP')
+                      ? 'bg-gradient-to-r from-crimson to-roseaccent text-white'
+                      : 'bg-black/75 text-champagne border border-champagne/40'
+                  }">
+                    ${video.isSponsored ? 'Sponsored' : video.badge}
+                  </span>
+
+                  <!-- Duration Badge -->
+                  <span class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/80 text-[11px] font-mono text-ivory">
+                    ${video.duration}
+                  </span>
+
+                  <!-- Hover Play Overlay -->
+                  <div class="play-overlay opacity-0 translate-y-2 transition duration-300 absolute inset-0 flex items-center justify-center bg-black/35">
+                    <span class="w-14 h-14 rounded-full bg-crimson/95 text-white flex items-center justify-center shadow-rose-glow">
+                      <svg class="w-6 h-6 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Card Body -->
+                <div class="p-5">
+                  <div class="flex items-center justify-between text-[11px] text-silver mb-2">
+                    <span class="text-roseaccent font-medium">${video.category}</span>
+                    <span class="text-champagne font-semibold">★ ${video.rating}%</span>
+                  </div>
+                  <h3 class="font-serif text-xl font-semibold text-ivory group-hover:text-roseaccent transition line-clamp-1 mb-3">
+                    ${video.title}
+                  </h3>
+                </div>
+              </div>
+
+              <!-- Model Avatar, Verified Checkmark & Views -->
+              <div class="px-5 pb-5">
+                <div class="pt-3 border-t border-white/[0.08] flex items-center justify-between text-xs text-silver">
+                  <div class="flex items-center gap-2 min-w-0">
+                    <span class="w-6 h-6 rounded-full overflow-hidden border border-white/20 shrink-0 block">
+                      ${createArtworkMarkup(model.id + '_av', model.name, model.accent, model.secondary, '', true)}
+                    </span>
+                    <span class="text-ivory font-medium truncate">${video.isSponsored && video.partnerName ? video.partnerName + ' • ' + model.name : model.name}</span>
+                    <span class="w-3.5 h-3.5 rounded-full bg-roseaccent text-white text-[9px] font-bold flex items-center justify-center shrink-0" title="Verified Creator">✓</span>
+                  </div>
+                  <span class="shrink-0 ml-2">${video.views}</span>
+                </div>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+
+      grid.querySelectorAll('.cinema-card').forEach(card => {
+        card.addEventListener('click', () => openVideoModal(card.dataset.videoId));
+      });
+    }
+
+    function resetAllFilters() {
+      activeCategory = 'All Releases';
+      searchQuery = '';
+      sortBy = 'featured';
+      document.getElementById('mainSearchInput').value = '';
+      document.getElementById('headerSearchInput').value = '';
+      document.getElementById('clearHeaderSearch').classList.add('hidden');
+      document.getElementById('sortSelect').value = 'featured';
+      renderCategories();
+      renderVideos();
+    }
+
+    // ---------- RENDER EXCLUSIVE MODELS SPOTLIGHT ----------
+    function renderModels() {
+      const container = document.getElementById('modelsGrid');
+      container.innerHTML = modelsData
+        .map(model => {
+          const filmCount = videosData.filter(v => v.modelId === model.id).length;
+          return `
+            <div data-model-id="${model.id}" class="model-card shrink-0 w-44 sm:w-auto rounded-2xl glass-card p-4 text-center hover:border-champagne/45 transition cursor-pointer group">
+              <div class="relative w-20 h-20 mx-auto mb-3">
+                <div class="w-full h-full rounded-full overflow-hidden border-2 border-white/15 group-hover:border-roseaccent transition">
+                  ${createArtworkMarkup(model.id + '_spot', model.name, model.accent, model.secondary, '', true)}
+                </div>
+                <span class="absolute bottom-0 right-0 w-5 h-5 rounded-full bg-roseaccent text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-elevated" title="Verified Muse">✓</span>
+              </div>
+              <h3 class="font-serif text-lg font-semibold text-ivory group-hover:text-roseaccent transition truncate">${model.name}</h3>
+              <p class="text-[11px] text-silver truncate">${model.origin}</p>
+              <div class="mt-3 pt-2.5 border-t border-white/[0.08] flex items-center justify-between text-[11px] text-silver">
+                <span>${model.followers}</span>
+                <span class="text-champagne">${filmCount} ${filmCount === 1 ? 'Film' : 'Films'}</span>
+              </div>
+            </div>
+          `;
+        })
+        .join('');
+
+      container.querySelectorAll('.model-card').forEach(card => {
+        card.addEventListener('click', () => openModelModal(card.dataset.modelId));
+      });
+    }
+
+    // ---------- VIDEO PLAYER MODAL LOGIC ----------
+    function openVideoModal(videoId) {
+      const video = videosData.find(v => v.id === videoId);
+      if (!video) return;
+      const model = modelsData.find(m => m.id === video.modelId) || modelsData[0];
+
+      currentPlayingVideo = video;
+      isPlaying = true;
+      updatePlayUI();
+
+      document.getElementById('playerTitle').textContent = video.title;
+      document.getElementById('playerBadge').textContent = video.isSponsored ? 'SPONSORED' : video.badge;
+      document.getElementById('playerPosterLayer').innerHTML = createArtworkMarkup(
+        video.id + '_player',
+        video.title,
+        video.accent,
+        video.secondary,
+        video.isSponsored ? (video.partnerName || 'SPONSORED PARTNER') : video.badge,
+        false
+      );
+      document.getElementById('playerDescription').textContent = video.description;
+      document.getElementById('playerModelAvatar').innerHTML = createArtworkMarkup(
+        model.id + '_player_av',
+        model.name,
+        model.accent,
+        model.secondary,
+        '',
+        true
+      );
+
+      const modelBtn = document.getElementById('playerModelNameBtn');
+      modelBtn.textContent = model.name;
+      modelBtn.onclick = () => {
+        closeVideoModal();
+        openModelModal(model.id);
+      };
+
+      const partnerTag = document.getElementById('playerPartnerTag');
+      if (video.isSponsored) {
+        partnerTag.textContent = video.partnerName ? `Sponsored by ${video.partnerName}` : 'Sponsored Partner';
+        partnerTag.classList.remove('hidden');
+      } else {
+        partnerTag.classList.add('hidden');
+      }
+
+      document.getElementById('playerModelMeta').textContent = `${model.origin} • ${video.rating}% Match • ${video.views} Views`;
+      document.getElementById('playerTimeDisplay').textContent = `07:12 / ${video.duration}`;
+      document.getElementById('playerScrubber').value = 24;
+
+      const isLiked = likedVideos.has(video.id);
+      document.getElementById('likeHeartIcon').className = isLiked ? 'text-roseaccent scale-110' : 'text-silver';
+      document.getElementById('playerLikesCount').textContent = isLiked ? `${video.likes} +1` : video.likes;
+
+      document.getElementById('playerTags').innerHTML = video.tags
+        .map(tag => `<span class="px-3 py-1 rounded-lg bg-surface border border-white/10 text-xs text-silver">#${tag}</span>`)
+        .join('');
+
+      const upNext = videosData.filter(v => v.id !== video.id).slice(0, 3);
+      const upNextContainer = document.getElementById('upNextList');
+      upNextContainer.innerHTML = upNext
+        .map(item => {
+          const itemModel = modelsData.find(m => m.id === item.modelId) || modelsData[0];
+          return `
+            <div data-upnext-id="${item.id}" class="upnext-item flex items-center gap-3 p-2 rounded-xl bg-surface/70 hover:bg-surface border border-white/[0.06] cursor-pointer transition">
+              <div class="w-20 h-12 rounded-lg overflow-hidden shrink-0">
+                ${createArtworkMarkup(item.id + '_up', item.title, item.accent, item.secondary, item.badge, false)}
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold text-ivory truncate">${item.title}</p>
+                <p class="text-[11px] text-silver truncate">${itemModel.name} • ${item.duration}</p>
+              </div>
+            </div>
+          `;
+        })
+        .join('');
+
+      upNextContainer.querySelectorAll('.upnext-item').forEach(el => {
+        el.addEventListener('click', () => openVideoModal(el.dataset.upnextId));
+      });
+
+      document.getElementById('videoPlayerModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+      document.getElementById('videoPlayerModal').classList.add('hidden');
+      document.body.style.overflow = '';
+      currentPlayingVideo = null;
+    }
+
+    function togglePlayState() {
+      isPlaying = !isPlaying;
+      updatePlayUI();
+    }
+
+    function updatePlayUI() {
+      const controlBtn = document.getElementById('controlPlayBtn');
+      const centerIcon = document.getElementById('centerPlayIcon');
+      const posterLayer = document.getElementById('playerPosterLayer');
+
+      if (isPlaying) {
+        controlBtn.textContent = 'Pause';
+        centerIcon.innerHTML = '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>';
+        posterLayer.classList.add('scale-105');
+      } else {
+        controlBtn.textContent = 'Play';
+        centerIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        posterLayer.classList.remove('scale-105');
+      }
+    }
+
+    // ---------- MODEL PROFILE MODAL LOGIC ----------
+    function openModelModal(modelId) {
+      const model = modelsData.find(m => m.id === modelId);
+      if (!model) return;
+
+      document.getElementById('modelModalAvatar').innerHTML = createArtworkMarkup(
+        model.id + '_modal_av',
+        model.name,
+        model.accent,
+        model.secondary,
+        '',
+        true
+      );
+      document.getElementById('modelModalName').textContent = model.name;
+      document.getElementById('modelModalOrigin').textContent = `${model.origin} • ${model.followers} Followers`;
+      document.getElementById('modelModalBio').textContent = model.bio;
+
+      const films = videosData.filter(v => v.modelId === model.id);
+      const filmsContainer = document.getElementById('modelFilmsList');
+      filmsContainer.innerHTML = films
+        .map(
+          f => `
+          <div data-film-id="${f.id}" class="model-film-item flex items-center gap-3 p-2.5 rounded-xl bg-surface hover:bg-white/10 border border-white/10 cursor-pointer transition">
+            <div class="w-16 h-11 rounded-lg overflow-hidden shrink-0">
+              ${createArtworkMarkup(f.id + '_mfilm', f.title, f.accent, f.secondary, f.badge, false)}
+            </div>
+            <div class="min-w-0">
+              <p class="text-xs font-semibold text-ivory truncate">${f.title}</p>
+              <p class="text-[11px] text-silver">${f.duration} • ${f.badge}</p>
+            </div>
+          </div>
+        `
+        )
+        .join('');
+
+      filmsContainer.querySelectorAll('.model-film-item').forEach(el => {
+        el.addEventListener('click', () => {
+          closeModelModal();
+          openVideoModal(el.dataset.filmId);
+        });
+      });
+
+      document.getElementById('modelProfileModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModelModal() {
+      document.getElementById('modelProfileModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // ---------- MEMBERSHIP PRICING TOGGLE & CHECKOUT ----------
+    function setBillingCycle(cycle) {
+      billingCycle = cycle;
+      const monthlyBtn = document.getElementById('monthlyBtn');
+      const annualBtn = document.getElementById('annualBtn');
+
+      if (cycle === 'monthly') {
+        monthlyBtn.className = 'px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-crimson text-white transition cursor-pointer';
+        annualBtn.className = 'px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-silver hover:text-ivory flex items-center gap-2 transition cursor-pointer';
+        document.getElementById('priceStandard').textContent = '$19';
+        document.getElementById('periodStandard').textContent = '/ month';
+        document.getElementById('priceVip').textContent = '$34';
+        document.getElementById('periodVip').textContent = '/ month';
+        document.getElementById('priceObsidian').textContent = '$59';
+        document.getElementById('periodObsidian').textContent = '/ month';
+      } else {
+        annualBtn.className = 'px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-crimson text-white flex items-center gap-2 transition cursor-pointer';
+        monthlyBtn.className = 'px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-silver hover:text-ivory transition cursor-pointer';
+        document.getElementById('priceStandard').textContent = '$11';
+        document.getElementById('periodStandard').textContent = '/ mo (billed yearly)';
+        document.getElementById('priceVip').textContent = '$20';
+        document.getElementById('periodVip').textContent = '/ mo (billed yearly)';
+        document.getElementById('priceObsidian').textContent = '$35';
+        document.getElementById('periodObsidian').textContent = '/ mo (billed yearly)';
+      }
+    }
+
+    function openCheckoutModal(planName, formattedPrice) {
+      document.getElementById('checkoutPlanTitle').textContent = planName;
+      document.getElementById('checkoutPlanPrice').textContent = formattedPrice;
+      document.getElementById('checkoutModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function completeDemoCheckout(e) {
+      e.preventDefault();
+      closeCheckoutModal();
+      showToast('Membership Activated! Discreet receipt sent.');
+    }
+
+    // ---------- AD PLACEMENTS, SMART AFFILIATE & TIMED/EXIT INTENT ----------
+    let promoIntentShown = false;
+    let promoCooldownUntil = 0;
+
+    function handleSmartAffiliateClick(event, label, affSub, fallbackAnchor = null, onProceedCallback = null) {
+      if (event) event.preventDefault();
+      const trackingString = `?ref=nocturne_vip&aff_sub=${encodeURIComponent(affSub)}`;
+      document.getElementById('affDestinationTitle').textContent = label || 'Partner Destination';
+      document.getElementById('affTrackingUrlPreview').textContent = trackingString;
+
+      const proceedBtn = document.getElementById('affProceedBtn');
+      proceedBtn.onclick = () => {
+        closeAffiliateModal();
+        showToast(`Tracked (${affSub}) — Opening ${label}`);
+        if (typeof onProceedCallback === 'function') {
+          onProceedCallback();
+        } else if (fallbackAnchor && fallbackAnchor.startsWith('#')) {
+          const targetEl = document.querySelector(fallbackAnchor);
+          if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+
+      document.getElementById('affiliateRedirectModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAffiliateModal() {
+      document.getElementById('affiliateRedirectModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function openPromoIntentModal(reasonLabel) {
+      const ageGateVisible = !document.getElementById('ageGateModal').classList.contains('hidden');
+      const anyModalOpen =
+        !document.getElementById('videoPlayerModal').classList.contains('hidden') ||
+        !document.getElementById('modelProfileModal').classList.contains('hidden') ||
+        !document.getElementById('checkoutModal').classList.contains('hidden') ||
+        !document.getElementById('affiliateRedirectModal').classList.contains('hidden');
+
+      if (ageGateVisible || anyModalOpen || promoIntentShown || Date.now() < promoCooldownUntil) {
+        return;
+      }
+
+      promoIntentShown = true;
+      document.getElementById('promoTriggerLabel').textContent = reasonLabel || 'Featured Partner Offer';
+      document.getElementById('promoIntentModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function dismissPromoIntentModal() {
+      promoCooldownUntil = Date.now() + 120000;
+      document.getElementById('promoIntentModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function syncStickyOffsets() {
+      const topBanner = document.getElementById('topStickyAdBanner');
+      const navbar = document.getElementById('mainNavbar');
+      const catBar = document.getElementById('categories');
+
+      const bannerHidden = !topBanner || topBanner.classList.contains('hidden');
+      const bannerHeight = bannerHidden ? 0 : topBanner.getBoundingClientRect().height;
+      const navHeight = navbar ? navbar.getBoundingClientRect().height : 72;
+
+      if (navbar) {
+        navbar.style.top = `${bannerHeight}px`;
+      }
+      if (catBar) {
+        catBar.style.top = `${bannerHeight + navHeight}px`;
+      }
+    }
+
+    function setupAdPlacementsAndIntent() {
+      syncStickyOffsets();
+      window.addEventListener('resize', syncStickyOffsets);
+
+      const dismissTopAdBtn = document.getElementById('dismissTopAdBtn');
+      if (dismissTopAdBtn) {
+        dismissTopAdBtn.addEventListener('click', () => {
+          document.getElementById('topStickyAdBanner').classList.add('hidden');
+          syncStickyOffsets();
+          showToast('Top partner banner dismissed');
+        });
+      }
+
+      document.getElementById('closePromoIntentBtn').addEventListener('click', dismissPromoIntentModal);
+      document.getElementById('snoozePromoIntentBtn').addEventListener('click', () => {
+        dismissPromoIntentModal();
+        showToast('Offer snoozed for 2 minutes');
+      });
+
+      document.getElementById('closeAffiliateModalBtn').addEventListener('click', closeAffiliateModal);
+      document.getElementById('affCancelBtn').addEventListener('click', closeAffiliateModal);
+
+      // Timed trigger after a few seconds (9s)
+      setTimeout(() => {
+        openPromoIntentModal('Timed Member Offer');
+      }, 9000);
+
+      // Desktop exit-intent trigger when cursor leaves top viewport edge
+      document.addEventListener('mouseout', e => {
+        if (!e.relatedTarget && !e.toElement && e.clientY <= 6) {
+          openPromoIntentModal('Exit-Intent Privilege');
+        }
+      });
+    }
+
+    // ---------- EVENTS, SEARCH, FAQ & FORM ----------
+    function openMobileDrawer() {
+      const backdrop = document.getElementById('mobileDrawerBackdrop');
+      const drawer = document.getElementById('mobileDrawer');
+      backdrop.classList.remove('hidden');
+      requestAnimationFrame(() => drawer.classList.remove('-translate-x-full'));
+    }
+
+    function closeMobileDrawer() {
+      const backdrop = document.getElementById('mobileDrawerBackdrop');
+      const drawer = document.getElementById('mobileDrawer');
+      drawer.classList.add('-translate-x-full');
+      setTimeout(() => backdrop.classList.add('hidden'), 280);
+    }
+
+    function setupEventListeners() {
+      // Age Gate
+      document.getElementById('enterSiteBtn').addEventListener('click', () => {
+        document.getElementById('ageGateModal').classList.add('hidden');
+        syncStickyOffsets();
+        showToast('Welcome to NOCTURNE. Enjoy discreet 4K streaming.');
+      });
+
+      document.getElementById('exitSiteBtn').addEventListener('click', () => {
+        const notice = document.getElementById('ageGateNotice');
+        notice.classList.remove('hidden');
+        setTimeout(() => {
+          window.location.href = 'https://www.google.com';
+        }, 900);
+      });
+
+      // Mobile Drawer
+      document.getElementById('mobileMenuBtn').addEventListener('click', openMobileDrawer);
+      document.getElementById('closeMobileMenu').addEventListener('click', closeMobileDrawer);
+      document.getElementById('mobileDrawerBackdrop').addEventListener('click', e => {
+        if (e.target === e.currentTarget) closeMobileDrawer();
+      });
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', closeMobileDrawer);
+      });
+
+      // Header Search Toggle
+      const searchDrawer = document.getElementById('headerSearchDrawer');
+      const headerInput = document.getElementById('headerSearchInput');
+      const clearHeaderBtn = document.getElementById('clearHeaderSearch');
+      const mainInput = document.getElementById('mainSearchInput');
+
+      document.getElementById('navSearchToggle').addEventListener('click', () => {
+        searchDrawer.classList.toggle('hidden');
+        syncStickyOffsets();
+        if (!searchDrawer.classList.contains('hidden')) {
+          headerInput.focus();
+        }
+      });
+
+      headerInput.addEventListener('input', e => {
+        searchQuery = e.target.value;
+        mainInput.value = searchQuery;
+        clearHeaderBtn.classList.toggle('hidden', !searchQuery);
+        renderVideos();
+      });
+
+      clearHeaderBtn.addEventListener('click', () => {
+        searchQuery = '';
+        headerInput.value = '';
+        mainInput.value = '';
+        clearHeaderBtn.classList.add('hidden');
+        renderVideos();
+      });
+
+      mainInput.addEventListener('input', e => {
+        searchQuery = e.target.value;
+        headerInput.value = searchQuery;
+        clearHeaderBtn.classList.toggle('hidden', !searchQuery);
+        renderVideos();
+      });
+
+      // Sort & Reset
+      document.getElementById('sortSelect').addEventListener('change', e => {
+        sortBy = e.target.value;
+        renderVideos();
+      });
+      document.getElementById('resetFiltersBtn').addEventListener('click', resetAllFilters);
+
+      // Video Player Controls
+      document.getElementById('closeVideoModalBtn').addEventListener('click', closeVideoModal);
+      document.getElementById('videoPlayerModal').addEventListener('click', e => {
+        if (e.target === e.currentTarget) closeVideoModal();
+      });
+      document.getElementById('centerPlayBtn').addEventListener('click', togglePlayState);
+      document.getElementById('controlPlayBtn').addEventListener('click', togglePlayState);
+
+      document.getElementById('muteToggleBtn').addEventListener('click', btn => {
+        isMuted = !isMuted;
+        btn.textContent = isMuted ? '🔇 Muted' : '🔊 Sound On';
+        showToast(isMuted ? 'Audio muted' : 'Audio enabled');
+      });
+
+      document.getElementById('playerScrubber').addEventListener('input', e => {
+        if (!currentPlayingVideo) return;
+        const pct = Number(e.target.value);
+        const [mins, secs] = currentPlayingVideo.duration.split(':').map(Number);
+        const totalSec = (mins || 25) * 60 + (secs || 0);
+        const curSec = Math.floor((pct / 100) * totalSec);
+        const curMinStr = String(Math.floor(curSec / 60)).padStart(2, '0');
+        const curSecStr = String(curSec % 60).padStart(2, '0');
+        document.getElementById('playerTimeDisplay').textContent = `${curMinStr}:${curSecStr} / ${currentPlayingVideo.duration}`;
+      });
+
+      document.getElementById('likeVideoBtn').addEventListener('click', () => {
+        if (!currentPlayingVideo) return;
+        const vid = currentPlayingVideo;
+        if (likedVideos.has(vid.id)) {
+          likedVideos.delete(vid.id);
+          document.getElementById('likeHeartIcon').className = 'text-silver';
+          document.getElementById('playerLikesCount').textContent = vid.likes;
+          showToast('Removed from favorites');
+        } else {
+          likedVideos.add(vid.id);
+          document.getElementById('likeHeartIcon').className = 'text-roseaccent';
+          document.getElementById('playerLikesCount').textContent = `${vid.likes} +1`;
+          showToast(`Added "${vid.title}" to favorites`);
+        }
+      });
+
+      document.getElementById('qualitySelect').addEventListener('change', e => {
+        showToast(`Playback stream switched to ${e.target.value}`);
+      });
+
+      // Model Modal Close
+      document.getElementById('closeModelModalBtn').addEventListener('click', closeModelModal);
+      document.getElementById('modelProfileModal').addEventListener('click', e => {
+        if (e.target === e.currentTarget) closeModelModal();
+      });
+
+      // Billing Toggle & Checkout
+      document.getElementById('monthlyBtn').addEventListener('click', () => setBillingCycle('monthly'));
+      document.getElementById('annualBtn').addEventListener('click', () => setBillingCycle('annual'));
+      document.getElementById('closeCheckoutModalBtn').addEventListener('click', closeCheckoutModal);
+      document.getElementById('checkoutModal').addEventListener('click', e => {
+        if (e.target === e.currentTarget) closeCheckoutModal();
+      });
+      document.getElementById('checkoutForm').addEventListener('submit', completeDemoCheckout);
+
+      // FAQ Accordion
+      document.querySelectorAll('.faq-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+          const content = trigger.nextElementSibling;
+          const icon = trigger.querySelector('.faq-icon');
+          const isOpen = !content.classList.contains('hidden');
+          content.classList.toggle('hidden');
+          trigger.setAttribute('aria-expanded', String(!isOpen));
+          icon.textContent = isOpen ? '+' : '−';
+        });
+      });
+
+      // Support Form Submission
+      document.getElementById('supportForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const name = document.getElementById('supportName').value.trim();
+        const topic = document.getElementById('supportTopic').value;
+        const confBox = document.getElementById('supportConfirmation');
+        const confText = document.getElementById('supportConfirmationText');
+
+        confText.textContent = `Thank you, ${name || 'Member'}. Your "${topic}" inquiry has been received under strict confidentiality.`;
+        confBox.classList.remove('hidden');
+        e.target.reset();
+        showToast('Discreet support message sent');
+      });
+
+      // Escape key closes active modals
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          closeVideoModal();
+          closeModelModal();
+          closeCheckoutModal();
+          closeAffiliateModal();
+          dismissPromoIntentModal();
+        }
+      });
+    }
+
+    let toastTimer = null;
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastMessage').textContent = message;
+      toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
